@@ -2,8 +2,7 @@
 ## ⚙️ Installation
 
 bash
-git clone https://github.com/yourusername/drf-shop-api.git
-cd drf-shop-api
+git clone https://github.com/jitendrainx/pr1.git
 python -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt

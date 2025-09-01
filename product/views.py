@@ -57,7 +57,7 @@ class ProductExportView(generics.ListAPIView):
         response = HttpResponse (
             content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
-        response['Content-Dispositionc'] = 'attachment:filename="products.xlsx"'
+        response['Content-Disposition'] = 'attachment; filename="products.xlsx"'
         workbook.save(response)
         return response
 

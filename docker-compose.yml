@@ -1,8 +1,36 @@
 version: '3.9'
- # Django application
- web:
-   build: .
-   volumes:
-     - .:/app
-   ports: 
-   - "8000:8000"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - sqlite_data:/app
+    depends_on:
+      - redis
+
+  worker:
+    build: .
+    command: celery -A masterproduct worker -l info
+    volumes:
+      - .:/app
+      - sqlite_data:/app
+    depends_on:
+      - redis
+
+  beat:
+    build: .
+    command: celery -A masterproduct beat -l info
+    volumes:
+      - .:/app
+      - sqlite_data:/app
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+
+volumes:
+  sqlite_data:
